@@ -21,10 +21,11 @@ public class LaboratorioBases extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("Slamena Market");
-        Parent root = FXMLLoader.load(getClass().getResource("Ventas.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Inicio.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
+        stage.show(); 
+        
         
     }
 

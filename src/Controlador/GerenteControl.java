@@ -7,6 +7,8 @@ package Controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,7 +35,7 @@ public class GerenteControl implements Initializable {
     @FXML
     private TextField txtNombresyApellidosVendedor;
     @FXML
-    private ComboBox<?> comboCargoVendedor;
+    private ComboBox<String> comboCargoVendedor;
     @FXML
     private ComboBox<?> comboCajaCargoVendedor;
     @FXML
@@ -146,8 +148,18 @@ public class GerenteControl implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        //comboCargoVendedor.getItems().add("hhhggg");
+        
+            ObservableList<String> options
+                = FXCollections.observableArrayList(
+                        "Option 1",
+                        "Option 2",
+                        "Option 3"
+                );
+
+        this.comboCargoVendedor= (ComboBox<String>) options;
+    
+    }
 
     @FXML
     private void IngresaCaja(ActionEvent event) {
@@ -196,5 +208,5 @@ public class GerenteControl implements Initializable {
     @FXML
     private void AñoConsulta(ActionEvent event) {
     }
-    
+
 }
