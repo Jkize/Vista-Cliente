@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 package Controlador;
-
+ 
+import Modelo.Empleado;
+import Modelo.Mensaje;
+import Modelo.Recibido;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 import static javafx.application.Application.launch;
@@ -21,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -29,7 +36,6 @@ import javafx.stage.Stage;
  */
 public class InicioControler implements Initializable {
 
-    
     @FXML
     private AnchorPane PanelPrincipal;
     @FXML
@@ -54,14 +60,41 @@ public class InicioControler implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         TxUsuario.setText("introduzca usuario");
         TxContraseña.setText("Contraseña");
-    }  
-        
-    public void pv() throws Exception {
-        
+
     }
+
+    public void pv() throws Exception {
+
+    }
+
     @FXML
-    private void handleButtonEntar(ActionEvent event)throws Exception {
-        System.exit(0);   
-}
-    
+    private void handleButtonEntar(ActionEvent event) throws Exception { 
+        //Primer envio de Socket
+        Socket socket = new Socket("localhost", 8000);
+
+        ObjectOutputStream escribir = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream leer = new ObjectInputStream(socket.getInputStream());
+        Empleado em = new Empleado();
+
+        em.setIdPersona(Long.parseLong(TxUsuario.getText().trim()));
+        em.setContrasena(TxUsuario.getText().trim());
+        Mensaje msg = new Mensaje("1", "null", em);
+
+        escribir.writeObject(msg);
+
+        Recibido reci = (Recibido) leer.readObject();
+
+        if (reci.isBool()) {
+            int n = (int) reci.getOb();
+            if (n == 1) {
+                System.out.println("ENTRA");
+            } else {
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+
+    }
+
 }

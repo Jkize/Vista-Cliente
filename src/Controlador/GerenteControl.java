@@ -29,7 +29,7 @@ import javafx.scene.control.TextField;
  * @author sergi
  */
 public class GerenteControl implements Initializable {
-
+ 
     @FXML
     private TextField txtCedulaVendedor;
     @FXML
@@ -149,15 +149,7 @@ public class GerenteControl implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //comboCargoVendedor.getItems().add("hhhggg");
-        
-            ObservableList<String> options
-                = FXCollections.observableArrayList(
-                        "Option 1",
-                        "Option 2",
-                        "Option 3"
-                );
-
-        this.comboCargoVendedor= (ComboBox<String>) options;
+         
     
     }
 
